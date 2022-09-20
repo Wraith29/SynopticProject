@@ -1,0 +1,13 @@
+{
+    "positive": [
+        "yes",
+        "yeah",
+        "yep",
+        "yea"
+    ],
+    "negative": [
+        "no",
+        "nope",
+        "nah"
+    ]
+}
