@@ -1,0 +1,7 @@
+.env/
+__pycache__/
+*.pyc
+.vscode/
+.pytest_cache/
+htmlcov/
+instance/
