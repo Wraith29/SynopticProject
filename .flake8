@@ -1,0 +1,5 @@
+[flake8]
+exclude = .git,__pycache__,.env,.pytest_cache
+max-complexity = 10
+color = always
+count = true
