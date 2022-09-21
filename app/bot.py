@@ -53,7 +53,7 @@ def all_questions() -> list[Question]:
         Question(
             "Do you have a preference for temperatures?",
             Question(
-                "Do you prefer, hot, cold, or mild?",
+                "Do you prefer hot, cold, or mild?",
                 None,
                 "TempRating"
             ),
@@ -101,9 +101,11 @@ class Bot:
         valid_holidays: list[Holiday] = []
         # TODO: Make This work!!!!
         for holiday in self.holidays:
-            for key, value in self.preference.items():
-                if getattr(holiday, str(key)).lower() == value.lower():
-                    valid_holidays.append(holiday)
+            attrs = [
+                attr for attr in dir(holiday)
+                if not attr.startswith("__")
+            ]
+            print(attrs)
 
         print(valid_holidays)
 

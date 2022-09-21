@@ -1,3 +1,5 @@
+
+
 class Message {
     constructor(sender, message) {
         this.sender = sender;
@@ -56,12 +58,13 @@ class HolidayChatBot {
         }
 
         messageList.replaceChildren(...messages);
+        let chatBox = document.querySelector("#chat-box");
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
 }
 
 let bot = new HolidayChatBot();
 
-bot.updateScreen();
 
 async function handleMessageSubmit() {
     let messageInput = document.querySelector("#message-input");
@@ -80,4 +83,16 @@ async function handleMessageSubmit() {
 
 async function resetBot() {
     fetch("/reset", {method: "POST"});
+}
+
+window.onload = async () => {
+    document.querySelector("#message-input").focus();
+    document.addEventListener("keypress", async ev => {
+        if (ev.code === "Enter") {
+            await handleMessageSubmit();
+        }
+    });
+
+
+    bot.updateScreen();
 }

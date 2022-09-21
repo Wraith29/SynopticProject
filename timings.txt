@@ -2,11 +2,12 @@ Cumulative Time: 6h 50m
 
 Tuesday:
 Start: 8:40am
-Design: 8:40 -> 9:45am
+Design: 8:40am -> 9:45am
 Development: 9:45am -> 12pm
 Lunch: 12pm -> 1pm
 Development: 1pm -> 4:30pm
 Total: 6h 50m
 
 Wednesday:
-Start: 
+Start: 7:40am
+Development: 7:40 -> 
