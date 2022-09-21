@@ -1,5 +1,5 @@
 from flask import Flask
-from flask.testing import FlaskClient, FlaskCliRunner
+from flask.testing import FlaskClient
 from pytest import fixture
 from app import create_app
 from app.bot import Bot
@@ -16,11 +16,6 @@ def app() -> Flask:
 @fixture
 def client(app: Flask) -> FlaskClient:
     return app.test_client()
-
-
-@fixture
-def runner(app: Flask) -> FlaskCliRunner:
-    return app.test_cli_runner()
 
 
 @fixture
