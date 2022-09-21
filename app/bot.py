@@ -4,7 +4,7 @@ from copy import deepcopy
 from random import shuffle
 from dataclasses import dataclass
 from typing import Optional
-from app.data import get_all_holidays, get_valid_holidays
+from app.data import get_all_holidays, get_all_responses, get_valid_holidays
 from app.utils import is_positive_message
 
 
@@ -104,8 +104,6 @@ class Bot:
     def generate_holidays(self) -> str:
         valid_holidays = deepcopy(self.holidays)
 
-        # TODO: Make This work!!!!
-
         for key, value in self.preference.items():
             valid_holidays = get_valid_holidays(
                 valid_holidays,
@@ -123,7 +121,9 @@ class Bot:
 
         return "\n".join(holiday_message)
 
-    def handle_impact(self, impact: str, message: str) -> None:
+    def handle_impact(self, impact: str | None, message: str) -> None:
+        if impact is None:
+            return
         self.preference[impact] = message
 
     def next_question(self) -> None:
@@ -133,7 +133,7 @@ class Bot:
 
     def update_question(self, message: str) -> str:
         if self.current_question.followup is not None and \
-           is_positive_message(message):
+           is_positive_message(message, get_all_responses()["positive"]):
             self.current_question = self.current_question.followup
             return self.current_question.question
 
