@@ -102,3 +102,9 @@ def test_bot_question_follow_is_set(bot: Bot) -> None:
     assert bot.current_question == bot.questions[0].followup
     assert "Thanks for using the Holiday Chat Bot username" in holiday_msg
     assert ", TestCountry" in holiday_msg
+
+
+def test_bot_first_message_sets_username(bot: Bot) -> None:
+    bot.handle("Isaac")
+
+    assert bot.username == "Isaac"
