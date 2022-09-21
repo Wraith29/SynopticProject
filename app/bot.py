@@ -1,4 +1,4 @@
-__all__ = ["bot"]
+__all__ = ["Bot", "bot", "Question"]
 
 from copy import deepcopy
 from random import shuffle
