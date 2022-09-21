@@ -11,7 +11,7 @@ class Holiday:
     Continent: str
     Country: str
     Category: str
-    StarRating: str
+    StarRating: int
     TempRating: str
     Location: str
     PricePerNight: int

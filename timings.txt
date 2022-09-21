@@ -10,4 +10,6 @@ Total: 6h 50m
 
 Wednesday:
 Start: 7:40am
-Development: 7:40 -> 
+Development: 7:40 -> 10:10am
+Unit Testing: 10:10am -> 12pm
+Lunch: 12pm -> 1pm
