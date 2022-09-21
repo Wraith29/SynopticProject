@@ -31,7 +31,7 @@ class HolidayChatBot {
 
         this.updateScreen();
         setTimeout(() => {
-            this.messages.push(new Message("Bot", res.res));
+            this.messages.push(new Message("Bot", res.msg));
             this.updateScreen();
         }, 1000);
     }

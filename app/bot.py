@@ -1,11 +1,11 @@
 __all__ = ["bot"]
 
+from copy import deepcopy
 from random import shuffle
 from dataclasses import dataclass
 from typing import Optional
-from app.data import get_all_holidays, get_all_responses
-from app.holiday import Holiday
-from app.utils import sanitise
+from app.data import get_all_holidays, get_valid_holidays
+from app.utils import is_positive_message
 
 
 @dataclass
@@ -32,7 +32,7 @@ def all_questions() -> list[Question]:
             Question(
                 "What is your preferred continent?",
                 None,
-                "Contintent"
+                "Continent"
             ),
             None
         ),
@@ -69,7 +69,7 @@ def all_questions() -> list[Question]:
             None
         ),
         Question(
-            "Do you have an upper price limit?",
+            "Do you have an upper price limit? (Per night)",
             Question(
                 "What is your upper price limit?",
                 None,
@@ -83,9 +83,13 @@ def all_questions() -> list[Question]:
 
 
 class Bot:
+    """
+    This is the main part of the application\n
+    It contains all of the logic for selecting user preferences\n
+    and then returns the list of holidays that meet the users criteria.
+    """
     def __init__(self) -> None:
         self.holidays = get_all_holidays()
-        self.responses = get_all_responses()
         self.questions = all_questions()
 
         self.preference = {}
@@ -98,46 +102,60 @@ class Bot:
         self.previous_question = self.current_question
 
     def generate_holidays(self) -> str:
-        valid_holidays: list[Holiday] = []
+        valid_holidays = deepcopy(self.holidays)
+
         # TODO: Make This work!!!!
-        for holiday in self.holidays:
-            attrs = [
-                attr for attr in dir(holiday)
-                if not attr.startswith("__")
-            ]
-            print(attrs)
 
-        print(valid_holidays)
+        for key, value in self.preference.items():
+            valid_holidays = get_valid_holidays(
+                valid_holidays,
+                key,
+                value
+            )
 
-        return "Thanks for using the Holiday bot!"
+        holiday_message = [
+            "Thanks for using the Holiday Chat Bot!",
+            "Here is a list of recommended holidays based on your preferences:"
+        ]
+
+        for holiday in valid_holidays:
+            holiday_message.append(str(holiday))
+
+        return "\n".join(holiday_message)
 
     def handle_impact(self, impact: str, message: str) -> None:
         self.preference[impact] = message
 
-    def respond(self, message: str) -> str:
-        """Responds to the users message"""
-        if self.before_first_question:
-            self.before_first_question = False
+    def next_question(self) -> None:
+        self.question_index += 1
+        self.previous_question = self.current_question
+        self.current_question = self.questions[self.question_index]
+
+    def update_question(self, message: str) -> str:
+        if self.current_question.followup is not None and \
+           is_positive_message(message):
+            self.current_question = self.current_question.followup
             return self.current_question.question
 
-        if self.current_question.followup is not None and \
-           sanitise(message) in self.responses["positive"]:
-            self.current_question = self.current_question.followup
         elif self.question_index < len(self.questions) - 1:
             self.handle_impact(self.current_question.impact, message)
-            self.question_index += 1
-            self.previous_question = self.current_question
-            self.current_question = self.questions[self.question_index]
+            self.next_question()
+            return self.current_question.question
+
         else:
             self.handle_impact(self.current_question.impact, message)
             return self.generate_holidays()
 
-        return self.current_question.question
+    def respond(self, message: str) -> str:
+        """Responds to the users message"""
+        return self.update_question(message)
 
     def handle_message(self, message: str) -> str:
-        msg_to_send = self.respond(message)
-
-        return msg_to_send
+        if self.before_first_question:
+            self.before_first_question = False
+            return self.current_question.question
+        else:
+            return self.respond(message)
 
     def reset(self) -> None:
         """Resets the bot to it's original state, so it can be used again"""
@@ -149,3 +167,4 @@ class Bot:
 
 
 bot = Bot()
+"""The instance of the bot object for use in the application"""

@@ -15,3 +15,9 @@ class Holiday:
     TempRating: str
     Location: str
     PricePerNight: int
+
+    def __str__(self) -> str:
+        return f"""
+Hotel {self.HotelName} in {self.City}, {self.Country}. {self.StarRating}⭐.
+£{self.PricePerNight} / Night
+"""

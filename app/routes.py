@@ -18,7 +18,7 @@ def index() -> str:
 def receive_message() -> Response:
     message = request.json["msg"]
     response = bot.handle_message(message)
-    return jsonify({"res": response})
+    return jsonify({"msg": response})
 
 
 @bp.post("/reset")

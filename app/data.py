@@ -1,8 +1,9 @@
-__all__ = ["get_all_holidays"]
+__all__ = ["get_all_holidays", "get_valid_holidays"]
 
 import json
 import os
 from app.holiday import Holiday
+from app.utils import lower_if_str
 
 
 def holiday_from_json(obj: dict[str, str | int]) -> Holiday:
@@ -31,6 +32,27 @@ def get_all_holidays() -> list[Holiday]:
         holidays = json.loads(data.read())
 
     return [holiday_from_json(holiday) for holiday in holidays]
+
+
+def get_valid_holidays(
+    holidays: list[Holiday],
+    key: str,
+    value: str | int
+) -> list[Holiday]:
+    out: list[Holiday] = []
+    for holiday in holidays:
+        match key.lower():
+            case "continent" | "category" | "temprating" | "location":
+                if lower_if_str(getattr(holiday, key)) == value.lower():
+                    out.append(holiday)
+            case "starrating":
+                if int(getattr(holiday, key)) >= int(value):
+                    out.append(holiday)
+            case "pricepernight":
+                if int(getattr(holiday, key)) <= int(value):
+                    out.append(holiday)
+
+    return out
 
 
 def get_all_responses() -> list[dict[str, list[str]]]:

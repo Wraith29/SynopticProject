@@ -1,19 +1,11 @@
-__all__ = ["sanitise"]
+__all__ = ["is_positive_message", "lower_if_str"]
 
 
-def remove_punctuation(msg: str) -> str:
-    out = ""
-    for c in msg:
-        if c not in ['!', '?', '_']:
-            out += c
-
-    return out
+def is_positive_message(msg: str) -> bool:
+    return True
 
 
-def sanitise(msg: str) -> str:
-    msg = msg.lower()
-    msg = msg.strip()
-
-    msg = remove_punctuation(msg)
-
-    return msg
+def lower_if_str(value: str | int) -> str | int:
+    if isinstance(value, int):
+        return value
+    return value.lower()
