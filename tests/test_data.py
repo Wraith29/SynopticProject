@@ -27,3 +27,46 @@ def test_get_valid_holidays() -> None:
 
     assert len(get_valid_holidays(_holidays, "StarRating", 5)) == 0
     assert len(get_valid_holidays(_holidays, "PricePerNight", 1)) == 1
+
+
+def test_get_valid_holidays_category_either_returns_all_categories() -> None:
+    _holidays = [
+        Holiday(
+            1,
+            "TestHotel",
+            "TestCity",
+            "TestContinent",
+            "TestCountry",
+            "active",
+            1,
+            "TestTempRating",
+            "TestLocation",
+            1
+        ),
+        Holiday(
+            2,
+            "TestHotel",
+            "TestCity",
+            "TestContinent",
+            "TestCountry",
+            "lazy",
+            1,
+            "TestTempRating",
+            "TestLocation",
+            1
+        ),
+        Holiday(
+            3,
+            "TestHotel",
+            "TestCity",
+            "TestContinent",
+            "TestCountry",
+            "active",
+            1,
+            "TestTempRating",
+            "TestLocation",
+            1
+        )
+    ]
+    assert len(get_valid_holidays(_holidays, "Category", "either")) == 3
+    assert get_valid_holidays(_holidays, "Category", "either") == _holidays

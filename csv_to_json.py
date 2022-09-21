@@ -6,7 +6,6 @@ import os
 def csv_to_json(csv_path: str, out_path: str) -> None:
     with open(csv_path, "r") as f:
         reader = csv.DictReader(f)
-
         data = [row for row in reader]
 
     with open(out_path, "w") as f:

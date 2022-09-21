@@ -39,6 +39,9 @@ def get_valid_holidays(
     key: str,
     value: str | int
 ) -> list[Holiday]:
+    if key.lower() == "category" and value.lower() not in ["active", "lazy"]:
+        return holidays
+
     out: list[Holiday] = []
     for holiday in holidays:
         match key.lower():
