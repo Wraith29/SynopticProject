@@ -16,4 +16,5 @@ Manual Testing: 11:30am -> 12pm
 Lunch: 12pm -> 1pm
 Development: 1pm -> 1:15pm
 Manual Testing: 1:15pm -> 1:55pm
-Code Cleanup: 1:55pm -> 
+Code Cleanup: 1:55pm -> 3:30pm
+Development: 3:30pm -> 4:30pm

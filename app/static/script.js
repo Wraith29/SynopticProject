@@ -20,8 +20,12 @@ class Message {
  * Which are used to create the chat trail.
  */
 class HolidayChatBot {
+    username;
     constructor() {
-        this.messages = [new Message("Bot", "Welcome to the holiday chat bot!")];
+        this.beforeFirstMessage = true;
+        this.messages = [
+            new Message("Bot", "Welcome to the holiday chat bot!\nBefore we begin, what should I call you?")
+        ];
     }
 
     /**
@@ -32,7 +36,12 @@ class HolidayChatBot {
      * @param {string} message
      */
     async sendMessageToBot(message) {
-        this.messages.push(new Message("User", message));
+        if (this.beforeFirstMessage) {
+            this.beforeFirstMessage = false;
+            this.username = message;
+        }
+
+        this.messages.push(new Message(this.username, message));
         const method = "POST";
         const headers = {
             "Content-Type": "application/json"
@@ -54,7 +63,7 @@ class HolidayChatBot {
             this.updateScreen();
         }, randomNumber(500, 1500));
     }
-    
+
     /**
      * Called upon sending / receiving a message.
      * 
@@ -74,7 +83,7 @@ class HolidayChatBot {
             pElem.innerText = message.message;
             listItem.appendChild(h4Elem);
             listItem.appendChild(pElem);
-            
+
             listItem.classList.add("message");
 
             messages.push(listItem);
@@ -113,7 +122,7 @@ async function handleMessageSubmit() {
  * Sends a request to reset the preferences and questions on the server side bot.
  */
 async function resetBot() {
-    fetch("/reset", {method: "POST"});
+    fetch("/reset", { method: "POST" });
 }
 
 /**

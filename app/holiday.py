@@ -20,5 +20,4 @@ class Holiday:
         return f"""
 Hotel {self.HotelName} in {self.City}, {self.Country}.
 Rating: {self.StarRating}⭐.
-£{self.PricePerNight} / Night.
-"""
+£{self.PricePerNight} / Night."""

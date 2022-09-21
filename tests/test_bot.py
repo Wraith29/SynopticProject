@@ -30,6 +30,7 @@ def setup_bot(bot: Bot) -> None:
     bot.current_question = bot.questions[bot.question_index]
     bot.before_first_question = False
     bot.holidays = _holidays
+    bot.username = "username"
 
 
 def test_bot_sets_preferences(bot: Bot) -> None:
@@ -59,7 +60,7 @@ def test_bot_generates_correct_holidays(bot: Bot) -> None:
 
     msg = bot._generate_holidays()
 
-    assert "Thanks for using the Holiday Chat Bot!" in msg
+    assert "Thanks for using the Holiday Chat Bot username" in msg
     assert "Hotel TestHotel" in msg
     assert "Rating: 5⭐" in msg
     assert ", TestCountry" in msg
@@ -86,10 +87,11 @@ def test_bot_generates_holidays_with_no_questions_left(bot: Bot) -> None:
     bot.handle("")
     bot.handle("")
 
-    assert "Thanks for using the Holiday Chat Bot!" in bot.handle("")
+    assert "Thanks for using the Holiday Chat Bot username" in bot.handle("")
 
 
 def test_bot_question_follow_is_set(bot: Bot) -> None:
+    bot.username = "username"
     bot.before_first_question = False
     bot.questions = [Question("", Question("", None, "Continent"), None)]
     bot.current_question = bot.questions[0]
@@ -98,5 +100,5 @@ def test_bot_question_follow_is_set(bot: Bot) -> None:
     assert bot.handle("yes") == ""
     holiday_msg = bot.handle("TestContinent")
     assert bot.current_question == bot.questions[0].followup
-    assert "Thanks for using the Holiday Chat Bot!" in holiday_msg
+    assert "Thanks for using the Holiday Chat Bot username" in holiday_msg
     assert ", TestCountry" in holiday_msg

@@ -13,6 +13,7 @@ class Bot:
     and then returns the list of holidays that meet the users criteria.
     """
     def __init__(self) -> None:
+        self.username = ""
         self.holidays = get_all_holidays()
         self.questions = all_questions()
 
@@ -35,7 +36,7 @@ class Bot:
             )
 
         holiday_message = [
-            "Thanks for using the Holiday Chat Bot!",
+            f"Thanks for using the Holiday Chat Bot {self.username}.",
             "Here is a list of recommended holidays based on your preferences:"
         ]
 
@@ -75,6 +76,7 @@ class Bot:
     def handle(self, message: str) -> str:
         if self.before_first_question:
             self.before_first_question = False
+            self.username = message
             return self.current_question.question
         else:
             return self._respond(message)
