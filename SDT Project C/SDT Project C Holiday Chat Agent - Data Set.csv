@@ -19,4 +19,4 @@ HolidayReference,HotelName,City,Continent,Country,Category,StarRating,TempRating
 18,Casablanca,Havana,North America,Cuba,lazy,5,mild,city,29
 19,TechCity,Tokyo,Asia,Japan,active,3,mild,city,71
 20,IceHotel,Base Marambio,Antarctica,Antartica,active,5,cold,mountain,270
-21,NorthStar,,Arctic,Greenland,active,5,cold,mountain,250
+21,NorthStar,Nuuk,Arctic,Greenland,active,5,cold,mountain,250
