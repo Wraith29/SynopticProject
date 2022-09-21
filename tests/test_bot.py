@@ -27,13 +27,13 @@ _holidays: list[Holiday] = [
 def setup_bot(bot: Bot) -> None:
     bot.questions = _questions
     bot.current_question = bot.questions[bot.question_index]
-    bot.before_first_question = False  # This could cause issues
+    bot.before_first_question = False
     bot.holidays = _holidays
 
 
 def test_bot_sets_preferences(bot: Bot) -> None:
     setup_bot(bot)
-    bot.handle_message("yes")  # A positive response
+    bot.handle_message("yes")
     assert bot.preference.get("TestImpact") is not None
     assert len(bot.preference.keys()) == 1
 
