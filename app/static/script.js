@@ -1,4 +1,6 @@
-
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * max) + min;
+}
 
 class Message {
     constructor(sender, message) {
@@ -33,7 +35,7 @@ class HolidayChatBot {
         setTimeout(() => {
             this.messages.push(new Message("Bot", res.msg));
             this.updateScreen();
-        }, 1000);
+        }, randomNumber(500, 1500));
     }
     
     // This method will update the list of messages on screen
