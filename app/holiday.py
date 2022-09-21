@@ -18,6 +18,7 @@ class Holiday:
 
     def __str__(self) -> str:
         return f"""
-Hotel {self.HotelName} in {self.City}, {self.Country}. {self.StarRating}⭐.
-£{self.PricePerNight} / Night
+Hotel {self.HotelName} in {self.City}, {self.Country}.
+Rating: {self.StarRating}⭐.
+£{self.PricePerNight} / Night.
 """
