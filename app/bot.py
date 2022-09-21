@@ -148,7 +148,7 @@ class Bot:
 
     def respond(self, message: str) -> str:
         """Responds to the users message"""
-        return self.update_question(message)
+        return self.update_question(message.lower())
 
     def handle_message(self, message: str) -> str:
         if self.before_first_question:
