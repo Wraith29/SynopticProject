@@ -11,5 +11,9 @@ Total: 6h 50m
 Wednesday:
 Start: 7:40am
 Development: 7:40 -> 10:10am
-Unit Testing: 10:10am -> 12pm
+Unit Testing: 10:10am -> 11:30am
+Manual Testing: 11:30am -> 12pm
 Lunch: 12pm -> 1pm
+Development: 1pm -> 1:15pm
+Manual Testing: 1:15pm -> 1:55pm
+Code Cleanup: 1:55pm -> 
