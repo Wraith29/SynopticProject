@@ -17,7 +17,12 @@ class Holiday:
     PricePerNight: int
 
     def __str__(self) -> str:
-        return f"""
-Hotel {self.HotelName} in {self.City}, {self.Country}.
-Rating: {self.StarRating}⭐.
-£{self.PricePerNight} / Night."""
+        lines = [
+            f"\nHotel {self.HotelName} in {self.City}, {self.Country}",
+            f"Continent: {self.Continent.capitalize()}.",
+            f"Location: {self.Location.capitalize()}",
+            f"Rating: {self.StarRating}⭐",
+            f"Temperature: {self.TempRating.capitalize()}",
+            f"Price: £{self.PricePerNight} / Night"
+        ]
+        return "\n".join(lines)
