@@ -3,6 +3,17 @@
         "yes",
         "yeah",
         "yep",
-        "yea"
+        "yea",
+        "affirmative",
+        "definitely",
+        "of course",
+        "for sure",
+        "totally"
+    ],
+    "negative": [
+        "no",
+        "nope",
+        "nah",
+        "negative"
     ]
 }

@@ -2,7 +2,7 @@ __all__ = ["Bot", "bot"]
 
 from copy import deepcopy
 from app.data import get_all_holidays, get_all_responses, get_valid_holidays
-from app.utils import is_positive_message
+from app.utils import is_positive_message, is_valid_response
 from app.question import all_questions
 
 
@@ -69,6 +69,14 @@ class Bot:
             return self._generate_holidays()
 
     def _respond(self, message: str) -> str:
+        all_responses = get_all_responses()
+        valid_responses = [
+            *all_responses["positive"],
+            *all_responses["negative"]
+        ]
+
+        if not is_valid_response(message, valid_responses):
+            return "I'm sorry, I didn't understand, could you say that again?"
         return self._update_question(message.lower())
 
     def handle(self, message: str) -> str:
