@@ -68,3 +68,23 @@
 .reset-btn {
     height: 100%;
 }
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(1vw); }
+    25% { transform: translateX(-1vw); }
+    50% { transform: translateX(1vw); }
+    75% { transform: translateX(-1vw); }
+    100% { transform: translateX(0vw); }
+}
+
+.red {
+    color: red;
+}
+
+.red-border {
+    border: 1px solid red;
+}

@@ -96,6 +96,32 @@ class HolidayChatBot {
 }
 
 let bot = new HolidayChatBot();
+/**
+ * This function will shake the input and change the placeholder message.
+ * This is a more user friendly way of letting them know the input is wrong than an alert.
+ */
+function shakeInput() {
+    // Getting the required elements
+    let container = document.querySelector("#message-box-container");
+    let messageInput = document.querySelector("#message-input");
+    let sendMessageButton = document.querySelector("#submit-button");
+
+    let placeholderMessage = messageInput.placeholder;
+
+    container.classList.add("shake");
+    messageInput.classList.add("red", "red-border");
+    sendMessageButton.classList.add("red", "red-border");
+
+    messageInput.placeholder = "Invalid Input.";
+
+    setTimeout(() => {
+        container.classList.remove("shake");
+        messageInput.classList.remove("red", "red-border");
+        sendMessageButton.classList.remove("red", "red-border");
+
+        messageInput.placeholder = placeholderMessage;
+    }, 1000); // 1 Second
+}
 
 /**
  * This function is called when either 'Enter' is pressed
@@ -109,7 +135,7 @@ async function handleMessageSubmit() {
 
     // Invalid Input (undefined, empty, etc)
     if (!message) {
-        alert("That is an invalid input, please try again!"); // TODO: Fix this maybe?
+        shakeInput();
         return;
     }
 
