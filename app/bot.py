@@ -69,14 +69,17 @@ class Bot:
             return self._generate_holidays()
 
     def _respond(self, message: str) -> str:
-        all_responses = get_all_responses()
-        valid_responses = [
-            *all_responses["positive"],
-            *all_responses["negative"]
-        ]
+        if self.current_question.impact is None:
+            all_responses = get_all_responses()
+            valid_responses = [
+                *all_responses["positive"],
+                *all_responses["negative"]
+            ]
 
-        if not is_valid_response(message, valid_responses):
-            return "I'm sorry, I didn't understand, could you say that again?"
+            if not is_valid_response(message, valid_responses):
+                return f"I'm sorry, I didn't understand '{message}'," \
+                       " please try a different answer.\n" \
+                       f"The question was: \n{self.current_question.question}"
         return self._update_question(message.lower())
 
     def handle(self, message: str) -> str:
