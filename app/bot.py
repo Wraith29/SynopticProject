@@ -23,7 +23,6 @@ class Bot:
         self.before_first_question = True
         self.question_index = 0
         self.current_question = self.questions[self.question_index]
-        self.previous_question = self.current_question
 
     def _generate_holidays(self) -> str:
         valid_holidays = deepcopy(self.holidays)
@@ -52,7 +51,6 @@ class Bot:
 
     def _next_question(self) -> None:
         self.question_index += 1
-        self.previous_question = self.current_question
         self.current_question = self.questions[self.question_index]
 
     def _update_question(self, message: str) -> str:
@@ -87,7 +85,6 @@ class Bot:
         self.before_first_question = True
         self.question_index = 0
         self.current_question = self.questions[self.question_index]
-        self.previous_question = self.current_question
 
 
 bot = Bot()
