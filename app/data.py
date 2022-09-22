@@ -3,7 +3,7 @@ __all__ = ["get_all_holidays", "get_valid_holidays"]
 import json
 import os
 from app.holiday import Holiday
-from app.utils import lower_if_str
+from app.utils import lower_if_str, sanitise
 
 
 def holiday_from_json(obj: dict[str, str | int]) -> Holiday:
@@ -39,6 +39,8 @@ def get_valid_holidays(
     key: str,
     value: str | int
 ) -> list[Holiday]:
+    if isinstance(value, str):
+        value = sanitise(value)
     if key.lower() == "category" and value.lower() not in ["active", "lazy"]:
         return holidays
 
@@ -48,9 +50,11 @@ def get_valid_holidays(
             case "continent" | "category" | "temprating" | "location":
                 if lower_if_str(getattr(holiday, key)) == value.lower():
                     out.append(holiday)
+
             case "starrating":
                 if int(getattr(holiday, key)) >= int(value):
                     out.append(holiday)
+
             case "pricepernight":
                 if int(getattr(holiday, key)) <= int(value):
                     out.append(holiday)
