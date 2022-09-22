@@ -66,14 +66,22 @@ def test_bot_generates_correct_holidays(bot: Bot) -> None:
     assert ", TestCountry" in msg
 
 
-def test_bot_doesnt_increment_question_idx_on_first_question(bot: Bot) -> None:
-    bot.questions = _questions
+def test_bot_first_req_sets_usn_second_incr_question_idx(bot: Bot) -> None:
+    bot.questions = [
+        Question("", None, None),
+        Question("", None, None),
+        Question("", None, None)
+    ]
+    bot.current_question = bot.questions[0]
+
+    assert bot.username == ""
     assert bot.before_first_question
     assert bot.question_index == 0
-    bot.handle("")
-    assert bot.question_index == 0
-    bot.handle("")
+    bot.handle("Isaac")
+    assert bot.username == "Isaac"
     assert not bot.before_first_question
+    assert bot.question_index == 0
+    bot.handle("Yes")
     assert bot.question_index != 0
 
 
@@ -108,3 +116,17 @@ def test_bot_first_message_sets_username(bot: Bot) -> None:
     bot.handle("Isaac")
 
     assert bot.username == "Isaac"
+
+
+def test_bot_invalid_response_asks_question_again(bot: Bot) -> None:
+    bot.before_first_question = False
+    bot.questions = [
+        Question("", Question("", None, "TestImpact"), None)
+    ]
+    bot.current_question = bot.questions[0]
+
+    response = bot.handle("abcdef")
+
+    assert "I'm sorry, I didn't understand 'abcdef'" in response
+    assert "abcdef" in response
+    assert "The question was: " in response

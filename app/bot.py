@@ -87,8 +87,7 @@ class Bot:
             self.before_first_question = False
             self.username = message
             return self.current_question.question
-        else:
-            return self._respond(message)
+        return self._respond(message)
 
     def reset(self) -> None:
         """Resets the bot to it's original state, so it can be used again"""

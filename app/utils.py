@@ -7,6 +7,7 @@ __all__ = [
 
 
 def sanitise(msg: str) -> str:
+    msg = msg.lower()
     return msg.strip(" !@#$%^&*(){}:;/?>.<,£")
 
 
