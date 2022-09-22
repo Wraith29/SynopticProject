@@ -24,12 +24,12 @@
             </div>
             <div id="input-container" class="row input-outer-container">
                 <div class="col-sm-0 col-md-1 col-lg-1"></div>
-                <div class="row col-sm-12 col-md-10 col-lg-10 input-container">
+                <div id="message-box-container" class="row col-sm-12 col-md-10 col-lg-10 input-container">
                     <label class="sr-only" for="message-input">Message</label>
                     <input class="col-sm-10 col-md-10 col-lg-10 message-input input" type="text" id="message-input"
                         placeholder="Message" />
                     <label class="sr-only" for="submit-message-input">Send Message</label>
-                    <button class="col-sm-2 col-md-2 col-lg-2 submit-message-input input" type="submit"
+                    <button class="col-sm-2 col-md-2 col-lg-2 submit-message-input input" type="submit" id="submit-button"
                         onclick="handleMessageSubmit()">Send Message</button>
                 </div>
                 <div class="row col-sm-1 col-md-1 col-lg-1 reset-btn-container">
