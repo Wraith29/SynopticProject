@@ -1,4 +1,4 @@
-Cumulative Time: 22h 30m
+Cumulative Time: 25h 00m
 
 Tuesday:
 Start: 8:40am
@@ -33,3 +33,9 @@ Lunch: 12pm -> 1pm                 |------|
 Documentation: 1:00pm -> 4:30mpm   |3h 30m|
 End: 4:30pm
 Total: 7h 50m
+
+Friday:
+Start: 7:30am
+Documentation: 7:30am -> 11:00am   |2h 30m|
+End: 11:00am
+Total: 2h 30m
